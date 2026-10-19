@@ -169,6 +169,42 @@ mark{background:#e8c56e55;color:#fff;border-radius:2px;padding:0 1px}
 .res big{display:block;font:700 1.8rem/1.2 var(--disp);color:var(--bone)}
 .res small{display:block;color:var(--mut);margin-top:2px}
 
+/* ---------- Sistema: layout dinâmico ---------- */
+.sn{position:sticky;top:0;z-index:9;display:flex;gap:6px;overflow-x:auto;margin:-26px 0 22px;padding:12px 0;background:#0c1112ee;backdrop-filter:blur(8px);border-bottom:1px solid var(--rule);scrollbar-width:none}
+.sn::-webkit-scrollbar{display:none}
+.sn button{flex:none;border-color:transparent;background:transparent;color:var(--mut);padding:6px 14px;border-radius:99px;font-size:.92rem}
+.sn button:hover{color:var(--bone);background:var(--stone)}
+.sn button.on{background:var(--bone);color:#10181a;font-weight:600;border-color:var(--bone)}
+#p-sis .sg{display:block;column-count:2;column-gap:14px}
+#p-sis .sc{break-inside:avoid;margin:0 0 14px;scroll-margin-top:72px}
+#p-sis .sc.wide,#p-sis .sc.duo{column-span:all}
+.sgh{margin:34px 0 14px;font:800 2rem/1 var(--disp);color:var(--bone);scroll-margin-top:72px;display:flex;align-items:center;gap:16px}
+.sgh::after{content:"";flex:1;height:1px;background:var(--rule2)}
+.cg{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:stretch}
+.cg .sc:nth-child(2){grid-column:1/-1;order:3}
+.cg .sc:not(:nth-child(2)){display:flex;flex-direction:column}.cg .sc:not(:nth-child(2)) .res{margin-top:auto}
+.cg .sc:not(:nth-child(2)) .fm{margin-bottom:14px}
+.dgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:0 28px}
+.dgrid h3:first-child{margin-top:12px}
+.cg .sc{margin:0;background:linear-gradient(180deg,var(--stone2),var(--stone))}
+.duo .cols{column-count:2;column-gap:44px;margin-top:6px}
+.duo .grp{break-inside:avoid;padding-bottom:6px}
+.duo .grp:first-child h3{margin-top:10px}
+.duo .cr{grid-template-columns:1fr}
+.kv li.mt{position:relative;padding-bottom:12px}
+.kv li.mt::after{content:"";position:absolute;left:0;bottom:3px;height:3px;width:var(--p);min-width:3px;background:var(--c);border-radius:2px;opacity:.85}
+.kv li.mt::before{content:"";position:absolute;left:0;right:0;bottom:3px;height:3px;background:var(--rule);border-radius:2px}
+.kv li.mt::after{z-index:1}
+.ph{align-items:flex-end}
+.ph span{border-color:color-mix(in srgb,var(--c) 60%,transparent);background:color-mix(in srgb,var(--c) 14%,transparent);padding-bottom:5px}
+.ph span:nth-child(1){padding-top:4px}.ph span:nth-child(2){padding-top:16px}.ph span:nth-child(3){padding-top:28px;background:color-mix(in srgb,var(--c) 30%,transparent)}
+.res{transition:background .4s}
+.res.upd{animation:rs .6s}
+@keyframes rs{from{background:#c8412c55}to{background:#c8412c14}}
+@media(max-width:980px){.dgrid{grid-template-columns:1fr 1fr}}
+@media(max-width:760px){#p-sis .sg{column-count:1}.duo .cols{column-count:1}.cg{grid-template-columns:1fr}.cg .sc:nth-child(2){order:0}.dgrid{grid-template-columns:1fr}.sgh{font-size:1.6rem}}
+@media(prefers-reduced-motion:reduce){.res.upd{animation:none}}
+
 @media(max-width:560px){
  .w{padding:0 14px 80px}.hero{padding:44px 0 0}.hero .in-h{padding:0 14px 22px}.hero .in-h{min-height:160px}
  .tabs{gap:20px}.tab{font-size:1.15rem}
@@ -226,9 +262,17 @@ mark{background:#e8c56e55;color:#fff;border-radius:2px;padding:0 1px}
 </div>
 
 <section id="p-sis" hidden aria-label="Sistema de cultivo e treinamento">
+<nav class="sn" id="sn" aria-label="Seções do sistema">
+ <button type="button" data-go="s-cult">Cultivação</button>
+ <button type="button" data-go="s-rol">Rolagens</button>
+ <button type="button" data-go="s-evo">Evolução</button>
+ <button type="button" data-go="s-trein">Treinamento</button>
+ <button type="button" data-go="s-duplo">Cultivo duplo</button>
+ <button type="button" data-go="s-tab">Tabelas</button>
+ <button type="button" data-go="s-calc">Calculadoras</button>
+</nav>
 <div class="sg">
-
- <article class="sc" style="--c:#e0b04e">
+ <article id="s-cult" class="sc" style="--c:#e0b04e">
   <h2>Cultivação</h2>
   <p>Cada nível de cultivo é dividido em 3 fases.</p>
   <div class="ph"><span>Inicial</span><span>Mediano</span><span>Pico</span></div>
@@ -236,8 +280,7 @@ mark{background:#e8c56e55;color:#fff;border-radius:2px;padding:0 1px}
   <p>O XP de cada fase é <b>25 × o limite de atributo</b> daquela fase. A barra cresce no mesmo ritmo que o atributo e o rendimento por rolagem.</p>
   <p class="nt">Refinamento de Qi: 500 → 1.000 → 1.500 · … · Transcendente: 56.000 → 61.000 → 66.000</p>
  </article>
-
- <article class="sc" style="--c:#8fd0c0">
+ <article id="s-rol" class="sc" style="--c:#8fd0c0">
   <h2>Rolagens de cultivo</h2>
   <h3>Mantra · rolagem de Vontade</h3>
   <ul class="kv">
@@ -251,49 +294,7 @@ mark{background:#e8c56e55;color:#fff;border-radius:2px;padding:0 1px}
   </ul>
   <p class="nt">Os valores entre 1 e 20 são interpolados de forma linear e arredondados (ver calculadora abaixo).</p>
  </article>
-
- <article class="sc" style="--c:#ef7fa6">
-  <h2>Cultivo duplo</h2>
-  <p>Dois cultivadores sentam juntos e fazem o Qi circular entre os dois. É sempre mais forte que o cultivo normal, mas exige confiança, afinidade e sorte nos dados.</p>
-  <h3>Como funciona</h3>
-  <ul class="kv">
-   <li>Participantes<b>2 cultivadores, ambos consentindo</b></li>
-   <li>Rolagem<b>Técnica de Cultivo ou Mantra (a dupla escolhe uma)</b></li>
-   <li>Ação<b>ocupa a ação de cultivo dos dois</b></li>
-   <li>Mantra<b>não soma com o cultivo duplo</b></li>
-  </ul>
-  <h3>Rendimento</h3>
-  <ul class="kv">
-   <li>Rendimento próprio<b>rolagem normal de Técnica de Cultivo (com críticos)</b></li>
-   <li>Sinergia<b>+½ do rendimento do parceiro</b></li>
-   <li>Harmonia<b>× (1 + bônus do laço)</b></li>
-  </ul>
-  <p class="nt">Cada um recebe: (próprio + ½ do parceiro) × Harmonia, arredondado para baixo. O XP vai para a barra de cada um e o limite de atributo continua valendo.</p>
-  <h3>Mantra duplo</h3>
-  <p>Versão sem técnica: os dois recitam o mantra em uníssono. Serve a quem ainda não tem Técnica de Cultivo, mas rende menos.</p>
-  <ul class="kv">
-   <li>Rolagem<b>Vontade de cada um</b></li>
-   <li>Rendimento próprio<b>Mantra normal (1 a 50 + 5 a cada 4 de Vontade)</b></li>
-   <li>Sinergia e Harmonia<b>iguais às do cultivo duplo</b></li>
-   <li>Ressonância e Dissonância<b>iguais às do cultivo duplo</b></li>
-  </ul>
-  <p class="nt">Os dois precisam usar a mesma rolagem na sessão: ou ambos Técnica, ou ambos Mantra. Sempre rende mais que o Mantra solo (exemplo: Vontade 12, d20 10 e sem laço, 39 XP viram 58).</p>
-  <h3>Harmonia · bônus do laço</h3>
-  <ul class="kv">
-   <li>Sem laço<b>+0%</b></li>
-   <li>Mesma via ou mesmo elemento<b>+25%</b></li>
-   <li>Mesma via e mesmo elemento<b>+50%</b></li>
-   <li>Cônjuge, Alma Gêmea ou Amor Eterno<b>+75%</b></li>
-  </ul>
-  <h3>Ressonância e falhas</h3>
-  <div class="cr">
-   <div class="ok"><b>Ressonância (dois 20)</b><span>A Harmonia sobe um degrau (máximo +100%). Cada 20 ainda dobra o próprio rendimento.</span></div>
-   <div class="bad"><b>Dissonância (algum 1)</b><span>A Sinergia se rompe: sem parceiro e sem Harmonia. Cada um fica com o rendimento normal (quem tirou 1 ainda reduz à metade).</span></div>
-  </div>
-  <p class="nt">A Sinergia também não funciona se os dois estiverem a mais de 1 nível de cultivo de distância: cada um recebe apenas o rendimento normal.</p>
- </article>
-
- <article class="sc" style="--c:#f3c862">
+ <article id="s-evo" class="sc" style="--c:#f3c862">
   <h2>Evolução de cultivo</h2>
   <p>Ao passar de fase ou de reino, o personagem recebe:</p>
   <ul class="kv">
@@ -303,8 +304,7 @@ mark{background:#e8c56e55;color:#fff;border-radius:2px;padding:0 1px}
   </ul>
   <p>O "aumento do limite" é a diferença entre o limite de atributo da fase seguinte e o da fase atual. Assim os pontos ganhos nunca passam do limite, e o resto do atributo vem do treinamento. A tabela de progressão abaixo mostra cada passagem.</p>
  </article>
-
- <article class="sc" style="--c:#ff9a52">
+ <article id="s-trein" class="sc" style="--c:#ff9a52">
   <h2>Treinamento</h2>
   <ul class="kv">
    <li>Rendimento<b>+1 de atributo a cada 10 pontos</b></li>
@@ -317,19 +317,61 @@ mark{background:#e8c56e55;color:#fff;border-radius:2px;padding:0 1px}
    <div class="bad"><b>Falha crítica (1)</b><span>Reduz o rendimento total à metade, arredondando para baixo.</span></div>
   </div>
  </article>
-
- <article class="sc wide" style="--c:#e0b04e">
+ <article id="s-duplo" class="sc duo" style="--c:#ef7fa6">
+  <h2>Cultivo duplo</h2>
+  <p>Dois cultivadores sentam juntos e fazem o Qi circular entre os dois. É sempre mais forte que o cultivo normal, mas exige confiança, afinidade e sorte nos dados.</p>
+  <div class="cols">
+<section class="grp"><h3>Como funciona</h3>
+  <ul class="kv">
+   <li>Participantes<b>2 cultivadores, ambos consentindo</b></li>
+   <li>Rolagem<b>Técnica de Cultivo ou Mantra (a dupla escolhe uma)</b></li>
+   <li>Ação<b>ocupa a ação de cultivo dos dois</b></li>
+   <li>Mantra<b>não soma com o cultivo duplo</b></li>
+  </ul></section>
+<section class="grp"><h3>Rendimento</h3>
+  <ul class="kv">
+   <li>Rendimento próprio<b>rolagem normal de Técnica de Cultivo (com críticos)</b></li>
+   <li>Sinergia<b>+½ do rendimento do parceiro</b></li>
+   <li>Harmonia<b>× (1 + bônus do laço)</b></li>
+  </ul>
+  <p class="nt">Cada um recebe: (próprio + ½ do parceiro) × Harmonia, arredondado para baixo. O XP vai para a barra de cada um e o limite de atributo continua valendo.</p></section>
+<section class="grp"><h3>Mantra duplo</h3>
+  <p>Versão sem técnica: os dois recitam o mantra em uníssono. Serve a quem ainda não tem Técnica de Cultivo, mas rende menos.</p>
+  <ul class="kv">
+   <li>Rolagem<b>Vontade de cada um</b></li>
+   <li>Rendimento próprio<b>Mantra normal (1 a 50 + 5 a cada 4 de Vontade)</b></li>
+   <li>Sinergia e Harmonia<b>iguais às do cultivo duplo</b></li>
+   <li>Ressonância e Dissonância<b>iguais às do cultivo duplo</b></li>
+  </ul>
+  <p class="nt">Os dois precisam usar a mesma rolagem na sessão: ou ambos Técnica, ou ambos Mantra. Sempre rende mais que o Mantra solo (exemplo: Vontade 12, d20 10 e sem laço, 39 XP viram 58).</p></section>
+<section class="grp"><h3>Harmonia · bônus do laço</h3>
+  <ul class="kv">
+   <li class="mt" style="--p:0%">Sem laço<b>+0%</b></li>
+   <li class="mt" style="--p:25%">Mesma via ou mesmo elemento<b>+25%</b></li>
+   <li class="mt" style="--p:50%">Mesma via e mesmo elemento<b>+50%</b></li>
+   <li class="mt" style="--p:75%">Cônjuge, Alma Gêmea ou Amor Eterno<b>+75%</b></li>
+  </ul></section>
+<section class="grp"><h3>Ressonância e falhas</h3>
+  <div class="cr">
+   <div class="ok"><b>Ressonância (dois 20)</b><span>A Harmonia sobe um degrau (máximo +100%). Cada 20 ainda dobra o próprio rendimento.</span></div>
+   <div class="bad"><b>Dissonância (algum 1)</b><span>A Sinergia se rompe: sem parceiro e sem Harmonia. Cada um fica com o rendimento normal (quem tirou 1 ainda reduz à metade).</span></div>
+  </div>
+  <p class="nt">A Sinergia também não funciona se os dois estiverem a mais de 1 nível de cultivo de distância: cada um recebe apenas o rendimento normal.</p></section>
+</div>
+ </article>
+ <article id="s-tab" class="sc wide" style="--c:#e0b04e">
   <h2>Progressão de cultivo</h2>
   <p>XP necessário para concluir cada fase (25 × limite de atributo) e o que a passagem concede. O Qi dobra a cada reino.</p>
   <div class="tw"><table class="tb" id="tprog"></table></div>
  </article>
-
- <article class="sc wide" style="--c:#ff9a52">
+ <article id="s-lim" class="sc wide" style="--c:#ff9a52">
   <h2>Limite de atributo por nível de cultivo</h2>
   <div class="tw"><table class="tb" id="tlim"></table></div>
   <p class="nt">O limite só aumenta no estágio Pico do nível de cultivo em questão.</p>
  </article>
-
+</div>
+<h2 class="sgh" id="s-calc">Calculadoras</h2>
+<div class="cg">
  <article class="sc" style="--c:#8fd0c0">
   <h2>Calculadora de cultivo</h2>
   <div class="fm">
@@ -340,32 +382,32 @@ mark{background:#e8c56e55;color:#fff;border-radius:2px;padding:0 1px}
   </div>
   <div class="res" id="c-r"></div>
  </article>
-
  <article class="sc" style="--c:#ef7fa6">
   <h2>Calculadora de cultivo duplo</h2>
-  <div class="fm">
-   <label>Rolagem<select id="d-t"><option value="t">Técnica de Cultivo</option><option value="m">Mantra (Vontade)</option></select></label>
-  </div>
-  <h3>Cultivador A</h3>
+  <div class="dgrid">
+<div><h3>Cultivador A</h3>
   <div class="fm">
    <label>d20<input id="d-da" type="number" min="1" max="20" value="10"></label>
    <label id="d-ala">Atributo<input id="d-aa" type="number" min="0" value="12"></label>
    <label id="d-gla">Grau da técnica<input id="d-ga" type="number" min="0" value="1"></label>
-  </div>
-  <h3>Cultivador B</h3>
+  </div></div>
+<div><h3>Cultivador B</h3>
   <div class="fm">
    <label>d20<input id="d-db" type="number" min="1" max="20" value="10"></label>
    <label id="d-alb">Atributo<input id="d-ab" type="number" min="0" value="12"></label>
    <label id="d-glb">Grau da técnica<input id="d-gb" type="number" min="0" value="1"></label>
+  </div></div>
+<div><div class="fm">
+   <label>Rolagem<select id="d-t"><option value="t">Técnica de Cultivo</option><option value="m">Mantra (Vontade)</option></select></label>
   </div>
-  <h3>Laço</h3>
+<h3>Laço</h3>
   <div class="fm">
    <label>Harmonia<select id="d-h"><option value="0">Sem laço (+0%)</option><option value="1">Mesma via ou elemento (+25%)</option><option value="2">Via e elemento iguais (+50%)</option><option value="3">Cônjuge / Amor Eterno (+75%)</option></select></label>
    <label>Diferença de nível<select id="d-n"><option value="0">0 ou 1 nível</option><option value="1">2 níveis ou mais</option></select></label>
+  </div></div>
   </div>
   <div class="res" id="d-r"></div>
  </article>
-
  <article class="sc" style="--c:#ff9a52">
   <h2>Calculadora de treinamento</h2>
   <div class="fm">
@@ -377,7 +419,6 @@ mark{background:#e8c56e55;color:#fff;border-radius:2px;padding:0 1px}
   </div>
   <div class="res" id="r-r"></div>
  </article>
-
 </div>
 </section>
 
@@ -2047,6 +2088,23 @@ g('mc').onchange=e=>{S.cat=e.target.value;render()};
 g('msort').onclick=e=>{const s=e.target.dataset.s;if(!s)return;S.sort=s;sortUI();render()};
 g('mclr').onclick=()=>{g('mq').value='';g('mk').value='';g('mc').value='';S.q='';S.terms=[];S.kind='';S.cat='';T.forEach(t=>S.tiers.add(t[0]));render()};
 chips();sortUI();render();
+})();
+</script>
+<script>
+(function(){
+const sn=document.getElementById('sn');if(!sn)return;
+const btns=[...sn.querySelectorAll('button')];
+btns.forEach(b=>b.addEventListener('click',()=>{const t=document.getElementById(b.dataset.go);if(t)t.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth',block:'start'})}));
+const els=btns.map(b=>document.getElementById(b.dataset.go));
+function spy(){
+ const sec=document.getElementById('p-sis');if(sec.hidden)return;
+ let cur=0;els.forEach((e,i)=>{if(e.getBoundingClientRect().top<120)cur=i});
+ btns.forEach((b,i)=>{b.classList.toggle('on',i===cur);if(i===cur&&sn.scrollWidth>sn.clientWidth){const l=b.offsetLeft-sn.clientWidth/2+b.clientWidth/2;sn.scrollTo({left:l})}});
+}
+addEventListener('scroll',spy,{passive:true});addEventListener('resize',spy);
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>setTimeout(spy,50)));
+spy();
+document.querySelectorAll('.res').forEach(r=>{let t;new MutationObserver(()=>{clearTimeout(t);r.classList.remove('upd');void r.offsetWidth;r.classList.add('upd')}).observe(r,{childList:true,characterData:true,subtree:true})});
 })();
 </script>
 </body>
