@@ -336,7 +336,6 @@ button.chip.at,button.chip.ex{display:inline-flex;margin:0;font-size:.85rem;font
  .mist{animation:mist 46s ease-in-out infinite alternate}
  .mist.m2{animation-duration:34s;animation-direction:alternate-reverse}
  .seal{animation:stamp .7s cubic-bezier(.2,.9,.3,1.2) .15s both,sealg 4.5s ease-in-out 1.2s infinite}
- #p-dest,#p-sis,#p-mat{animation:pin .45s ease-out}
  .anim .card{transition:opacity .5s ease-out,transform .5s cubic-bezier(.2,.8,.3,1),border-color .2s,background .2s,box-shadow .25s}
  .anim .card:not(.vis){opacity:0;transform:translateY(18px)}
  .anim .card.vis:hover{transform:translateY(-4px);box-shadow:0 10px 26px -12px color-mix(in srgb,var(--c) 70%,transparent)}
@@ -352,14 +351,72 @@ button.chip.at,button.chip.ex{display:inline-flex;margin:0;font-size:.85rem;font
  .card.on.t6 .gl{animation:breathe 3.2s ease-in-out infinite}
 }
 @keyframes mist{from{transform:translateX(-140px)}to{transform:translateX(140px)}}
-@keyframes sealg{0%,100%{filter:drop-shadow(0 0 0 transparent)}50%{filter:drop-shadow(0 0 14px color-mix(in srgb,var(--seal) 75%,transparent))}}
-@keyframes pin{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes sealg{0%,100%{filter:drop-shadow(0 0 0 rgba(226,89,63,0))}50%{filter:drop-shadow(0 0 14px rgba(226,89,63,.7))}}
+@keyframes pin{from{opacity:0;transform:translateY(14px);filter:blur(3px)}to{opacity:1;transform:none;filter:none}}
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes pulse{50%{opacity:.25}}
 @keyframes twk{0%,100%{opacity:1}50%{opacity:.15}}
-@keyframes glow{50%{filter:drop-shadow(0 0 12px var(--c))}}
+@keyframes glow{0%,100%{filter:drop-shadow(0 0 4px)}50%{filter:drop-shadow(0 0 13px)}}
 @keyframes breathe{50%{transform:scale(1.06)}}
 .gl{transform-origin:0 0}
+
+/* transições de abas e animações da aba Sistema */
+.tind,.snd{display:none}
+@media(prefers-reduced-motion:no-preference){
+ .anim .tabs{position:relative}
+ .anim .tind{display:block;position:absolute;bottom:-1px;height:3px;left:0;width:0;background:var(--seal);border-radius:2px;transition:transform .4s cubic-bezier(.3,.9,.3,1),width .4s cubic-bezier(.3,.9,.3,1)}
+ .anim .tab[aria-selected=true]{border-bottom-color:transparent}
+ .anim .sn{position:sticky}
+ .anim .snd{display:block;position:absolute;top:12px;left:0;height:0;width:0;background:var(--bone);border-radius:99px;transition:transform .35s cubic-bezier(.3,.9,.3,1),width .35s cubic-bezier(.3,.9,.3,1)}
+ .anim .sn button{position:relative;z-index:1;transition:color .3s,background .2s}
+ .anim .sn button.on{background:transparent;border-color:transparent}
+ #p-dest,#p-sis,#p-mat{animation:pin .5s cubic-bezier(.2,.8,.3,1)}
+
+ .anim #p-sis .sc,.anim .sgh{transition:opacity .55s ease-out,transform .55s cubic-bezier(.2,.8,.3,1),border-color .25s,box-shadow .25s}
+ .anim #p-sis .sc:not(.vis),.anim .sgh:not(.vis){opacity:0;transform:translateY(22px)}
+ .anim #p-sis .sc h2::after{content:"";display:block;height:2px;width:0;margin-top:7px;background:var(--c,var(--mist));border-radius:2px;transition:width .7s cubic-bezier(.2,.8,.3,1) .25s}
+ .anim #p-sis .sc.vis h2::after{width:42px}
+ .anim .sgh::after{transform-origin:left;transform:scaleX(0);transition:transform .9s cubic-bezier(.2,.8,.3,1) .2s}
+ .anim .sgh.vis::after{transform:none}
+
+ .anim .sc.vis .ph span{animation:phup .55s cubic-bezier(.2,.9,.3,1.15) both}
+ .anim .sc.vis .ph span:nth-child(2){animation-delay:.15s}
+ .anim .sc.vis .ph span:nth-child(3){animation:phup .55s cubic-bezier(.2,.9,.3,1.15) .3s both,pk 2.8s ease-in-out 1s infinite}
+ .anim .sc.vis .kv li.mt::after{animation:fillw 1s cubic-bezier(.2,.8,.3,1) both}
+ .anim .sc.vis .kv li.mt:nth-child(2)::after{animation-delay:.15s}
+ .anim .sc.vis .kv li.mt:nth-child(3)::after{animation-delay:.3s}
+ .anim .sc.vis .kv li.mt:nth-child(4)::after{animation-delay:.45s}
+ .anim .kv li{transition:background .2s,padding .2s}
+ .anim .kv li:hover{background:color-mix(in srgb,var(--c,var(--mist)) 8%,transparent);padding-left:6px;padding-right:6px}
+ .anim .kv li b{transition:color .2s}
+ .anim .kv li:hover b{color:var(--c,var(--bone))}
+ .anim .sc.vis .cr div{animation:popin .5s cubic-bezier(.2,.9,.3,1.2) .2s both}
+ .anim .sc.vis .cr div+div{animation-delay:.35s}
+ .anim .cr div{transition:box-shadow .25s,transform .25s}
+ .anim .cr .ok:hover{transform:translateY(-2px);box-shadow:0 0 18px -4px #5fb887aa}
+ .anim .cr .bad:hover{animation:shake .4s;box-shadow:0 0 18px -4px #f2907aaa}
+ .anim .sc.vis .tb tr{animation:rowin .45s ease-out calc(var(--i,0) * 18ms) both}
+ .anim .tb tr:not(.rqd):hover td{background:color-mix(in srgb,var(--c,var(--mist)) 7%,transparent)}
+ .anim .tb td{transition:background .15s}
+ .anim .tb tr.rqd:not([hidden]) .rqi{animation:rqin .4s cubic-bezier(.2,.8,.3,1)}
+ .anim .tb tr.rqd:not([hidden]) .rqp>div{animation:popin .45s cubic-bezier(.2,.9,.3,1.2) both}
+ .anim .tb tr.rqd:not([hidden]) .rqp>div:nth-child(2){animation-delay:.07s}
+ .anim .tb tr.rqd:not([hidden]) .rqp>div:nth-child(3){animation-delay:.14s}
+ .anim .tb tr.rqd:not([hidden]) .rqp>div:nth-child(4){animation-delay:.21s}
+ .anim .tb tr.rqd:not([hidden]) .rqp>div:nth-child(5){animation-delay:.28s}
+ .anim .rqp>div{transition:border-color .2s,transform .2s}
+ .anim .rqp>div:hover{border-color:var(--c);transform:translateY(-2px)}
+ .anim .res.upd big{animation:pop .45s cubic-bezier(.2,.9,.3,1.3)}
+ .anim .fm input,.anim .fm select{transition:border-color .2s,box-shadow .25s}
+}
+@keyframes phup{from{opacity:0;transform:translateY(14px) scaleY(.6)}to{opacity:1;transform:none}}
+@keyframes pk{0%,100%{box-shadow:0 0 0 0 transparent}50%{box-shadow:0 0 16px -2px color-mix(in srgb,var(--c) 70%,transparent)}}
+@keyframes fillw{from{width:0}}
+@keyframes popin{from{opacity:0;transform:scale(.94) translateY(8px)}to{opacity:1;transform:none}}
+@keyframes shake{20%{transform:translateX(-3px)}40%{transform:translateX(3px)}60%{transform:translateX(-2px)}80%{transform:translateX(2px)}}
+@keyframes rowin{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:none}}
+@keyframes rqin{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+@keyframes pop{0%{transform:scale(.85);opacity:.4}100%{transform:none;opacity:1}}
 </style>
 </head>
 <body>
@@ -2348,6 +2405,22 @@ const io=new IntersectionObserver(es=>{
  watch();new MutationObserver(watch).observe(l,{childList:true});
 });
 
+
+/* abas e menu do Sistema: indicador que desliza */
+const tabs=document.querySelector('.tabs'),tind=document.createElement('span');tind.className='tind';tabs.appendChild(tind);
+function mvTab(){const t=tabs.querySelector('.tab[aria-selected=true]');if(t){tind.style.width=t.offsetWidth+'px';tind.style.transform=`translateX(${t.offsetLeft}px)`}}
+new MutationObserver(mvTab).observe(tabs,{subtree:true,attributes:true,attributeFilter:['aria-selected']});
+const snav=document.getElementById('sn');let snd;
+function mvSn(){const b=snav.querySelector('button.on');if(!b)return;snd.style.width=b.offsetWidth+'px';snd.style.height=b.offsetHeight+'px';snd.style.top=b.offsetTop+'px';snd.style.transform=`translateX(${b.offsetLeft}px)`}
+if(snav){snd=document.createElement('span');snd.className='snd';snav.prepend(snd);new MutationObserver(mvSn).observe(snav,{subtree:true,attributes:true,attributeFilter:['class']})}
+const mv=()=>{mvTab();if(snd)mvSn()};
+addEventListener('resize',mv);document.fonts&&document.fonts.ready.then(mv);mv();
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>setTimeout(mv,60)));
+
+/* aba Sistema: seções aparecem ao rolar; linhas das tabelas entram em sequência */
+document.querySelectorAll('#p-sis .tb').forEach(t=>{let i=0;t.querySelectorAll('tr').forEach(r=>{if(!r.classList.contains('rqd'))r.style.setProperty('--i',i++)})});
+const io2=new IntersectionObserver(es=>{let k=0;es.forEach(e=>{if(!e.isIntersecting)return;const c=e.target;c.style.transitionDelay=Math.min(k++*80,320)+'ms';c.classList.add('vis');setTimeout(()=>c.style.transitionDelay='',900);io2.unobserve(c)})},{rootMargin:'0px 0px -40px'});
+document.querySelectorAll('#p-sis .sc,#p-sis .sgh').forEach(c=>io2.observe(c));
 /* partículas de Qi no fundo */
 const cv=document.getElementById('qi'),cx=cv.getContext('2d');
 let W,H,P=[],col=[],run=true;
