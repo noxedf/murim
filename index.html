@@ -16,7 +16,7 @@
  --ui:"Hanken Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;background:var(--ink)}
-body{margin:0;color:var(--txt);font:16px/1.6 var(--ui);min-height:100vh;background:var(--ink);-webkit-font-smoothing:antialiased}
+body{margin:0;color:var(--txt);font:16px/1.6 var(--ui);min-height:100vh;background:transparent;-webkit-font-smoothing:antialiased}
 .w{max-width:1120px;margin:0 auto;padding:0 20px 96px}
 
 /* ---------- cabeçalho ---------- */
@@ -329,10 +329,42 @@ button.chip.at,button.chip.ex{display:inline-flex;margin:0;font-size:.85rem;font
 }
 @media(prefers-reduced-motion:reduce){.card.hit,.seal{animation:none}html{scroll-behavior:auto}}
 
+
+/* ---------- animações (desligadas com "reduzir movimento") ---------- */
+#qi{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+@media(prefers-reduced-motion:no-preference){
+ .mist{animation:mist 46s ease-in-out infinite alternate}
+ .mist.m2{animation-duration:34s;animation-direction:alternate-reverse}
+ .seal{animation:stamp .7s cubic-bezier(.2,.9,.3,1.2) .15s both,sealg 4.5s ease-in-out 1.2s infinite}
+ #p-dest,#p-sis,#p-mat{animation:pin .45s ease-out}
+ .anim .card{transition:opacity .5s ease-out,transform .5s cubic-bezier(.2,.8,.3,1),border-color .2s,background .2s,box-shadow .25s}
+ .anim .card:not(.vis){opacity:0;transform:translateY(18px)}
+ .anim .card.vis:hover{transform:translateY(-4px);box-shadow:0 10px 26px -12px color-mix(in srgb,var(--c) 70%,transparent)}
+ .anim .sc{transition:border-color .25s,box-shadow .25s}
+ .anim .sc:hover{box-shadow:0 8px 24px -14px color-mix(in srgb,var(--c,var(--mist)) 70%,transparent)}
+ .card.on.t4 .ry{animation:spin 70s linear infinite}
+ .card.on.t5 .ry{animation:spin 45s linear infinite}
+ .card.on.t6 .ry{animation:spin 26s linear infinite}
+ .card.on.t4 .rg,.card.on.t5 .rg,.card.on.t6 .rg,.card.on.t5 .wg,.card.on.t6 .wg{animation:pulse 3.2s ease-in-out infinite}
+ .card.on .spk{animation:twk 2.4s ease-in-out infinite}
+ .card.on .spk:nth-of-type(2n){animation-delay:-.8s}.card.on .spk:nth-of-type(3n){animation-delay:-1.6s}
+ .card.on.t5 .em,.card.on.t6 .em{animation:glow 3.2s ease-in-out infinite}
+ .card.on.t6 .gl{animation:breathe 3.2s ease-in-out infinite}
+}
+@keyframes mist{from{transform:translateX(-140px)}to{transform:translateX(140px)}}
+@keyframes sealg{0%,100%{filter:drop-shadow(0 0 0 transparent)}50%{filter:drop-shadow(0 0 14px color-mix(in srgb,var(--seal) 75%,transparent))}}
+@keyframes pin{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pulse{50%{opacity:.25}}
+@keyframes twk{0%,100%{opacity:1}50%{opacity:.15}}
+@keyframes glow{50%{filter:drop-shadow(0 0 12px var(--c))}}
+@keyframes breathe{50%{transform:scale(1.06)}}
+.gl{transform-origin:0 0}
 </style>
 </head>
 <body>
-<header class="hero"><svg class="mt" viewBox="0 0 1200 300" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="mf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--ink);stop-opacity:0"/><stop offset="1" style="stop-color:var(--ink)"/></linearGradient></defs><path d="M0 210 L90 150 L150 185 L260 90 L340 160 L430 120 L540 200 L650 70 L740 150 L820 110 L930 190 L1030 100 L1120 160 L1200 120 V300 H0Z" style="fill:var(--m1)" opacity=".7"/><path d="M0 250 L110 200 L200 235 L330 160 L420 220 L560 140 L660 215 L790 150 L900 225 L1020 170 L1110 220 L1200 190 V300 H0Z" style="fill:var(--m2)" opacity=".95"/><path d="M0 285 L140 250 L260 275 L420 235 L580 278 L740 245 L900 280 L1060 250 L1200 272 V300 H0Z" style="fill:var(--m3)"/><rect width="1200" height="300" fill="url(#mf)"/></svg><div class="in-h"><h1>Murim<span>Login</span></h1><div class="seal" aria-hidden="true">武林</div></div></header>
+<canvas id="qi" aria-hidden="true"></canvas>
+<header class="hero"><svg class="mt" viewBox="0 0 1200 300" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="mf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--ink);stop-opacity:0"/><stop offset="1" style="stop-color:var(--ink)"/></linearGradient><radialGradient id="mg"><stop offset="0" style="stop-color:var(--mist);stop-opacity:.3"/><stop offset="1" style="stop-color:var(--mist);stop-opacity:0"/></radialGradient></defs><path d="M0 210 L90 150 L150 185 L260 90 L340 160 L430 120 L540 200 L650 70 L740 150 L820 110 L930 190 L1030 100 L1120 160 L1200 120 V300 H0Z" style="fill:var(--m1)" opacity=".7"/><g class="mist m1"><ellipse cx="200" cy="170" rx="260" ry="34" fill="url(#mg)"/><ellipse cx="760" cy="150" rx="300" ry="30" fill="url(#mg)"/><ellipse cx="1300" cy="175" rx="260" ry="32" fill="url(#mg)"/></g><path d="M0 250 L110 200 L200 235 L330 160 L420 220 L560 140 L660 215 L790 150 L900 225 L1020 170 L1110 220 L1200 190 V300 H0Z" style="fill:var(--m2)" opacity=".95"/><g class="mist m2"><ellipse cx="-100" cy="225" rx="280" ry="30" fill="url(#mg)"/><ellipse cx="520" cy="215" rx="320" ry="34" fill="url(#mg)"/><ellipse cx="1080" cy="230" rx="280" ry="28" fill="url(#mg)"/></g><path d="M0 285 L140 250 L260 275 L420 235 L580 278 L740 245 L900 280 L1060 250 L1200 272 V300 H0Z" style="fill:var(--m3)"/><rect width="1200" height="300" fill="url(#mf)"/></svg><div class="in-h"><h1>Murim<span>Login</span></h1><div class="seal" aria-hidden="true">武林</div></div></header>
 <div class="w">
 <div class="tabbar">
 <div class="tabs" role="tablist" aria-label="Seções">
@@ -2292,6 +2324,59 @@ addEventListener('scroll',spy,{passive:true});addEventListener('resize',spy);
 document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>setTimeout(spy,50)));
 spy();
 document.querySelectorAll('.res').forEach(r=>{let t;new MutationObserver(()=>{clearTimeout(t);r.classList.remove('upd');void r.offsetWidth;r.classList.add('upd')}).observe(r,{childList:true,characterData:true,subtree:true})});
+})();
+
+/* ---------- animações: partículas de Qi e entrada dos cartões ---------- */
+(function(){
+if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+document.documentElement.classList.add('anim');
+
+/* cartões: aparecem ao entrar na tela; ".on" liga as animações dos ícones só enquanto visíveis */
+const io=new IntersectionObserver(es=>{
+ let k=0;
+ es.forEach(e=>{
+  const c=e.target;
+  if(e.isIntersecting){
+   if(!c.classList.contains('vis')){c.style.transitionDelay=Math.min(k++*45,315)+'ms';c.classList.add('vis');setTimeout(()=>c.style.transitionDelay='',800)}
+   c.classList.add('on');
+  }else c.classList.remove('on');
+ });
+},{rootMargin:'60px 0px'});
+['list','mlist'].forEach(id=>{
+ const l=document.getElementById(id);if(!l)return;
+ const watch=()=>l.querySelectorAll('.card').forEach(c=>io.observe(c));
+ watch();new MutationObserver(watch).observe(l,{childList:true});
+});
+
+/* partículas de Qi no fundo */
+const cv=document.getElementById('qi'),cx=cv.getContext('2d');
+let W,H,P=[],col=[],run=true;
+const rnd=(a,b)=>a+Math.random()*(b-a);
+function colors(){const st=getComputedStyle(document.documentElement);const gd=st.getPropertyValue('--gold').trim();col=[gd,gd,st.getPropertyValue('--mist').trim(),st.getPropertyValue('--pos').trim()]}
+function part(y){return{x:rnd(0,W),y:y??rnd(0,H),r:rnd(1,2.8),vy:rnd(.18,.55),sw:rnd(.3,1.1),ph:rnd(0,6.28),tw:rnd(.01,.03),c:col[Math.floor(rnd(0,col.length))]}}
+function size(){
+ const d=Math.min(devicePixelRatio||1,2);W=innerWidth;H=innerHeight;
+ cv.width=W*d;cv.height=H*d;cx.setTransform(d,0,0,d,0,0);
+ const n=Math.min(110,Math.round(W*H/14000));
+ while(P.length<n)P.push(part());P.length=n;
+}
+function frame(){
+ if(!run)return;
+ cx.clearRect(0,0,W,H);
+ const light=document.documentElement.dataset.theme==='light';
+ for(const p of P){
+  p.y-=p.vy;p.ph+=p.tw;p.x+=Math.sin(p.ph)*p.sw*.3;
+  if(p.y<-10)Object.assign(p,part(H+10));
+  const a=(.6+.35*Math.sin(p.ph*2))*(light?.7:1);
+  cx.globalAlpha=a*.22;cx.fillStyle=p.c;cx.beginPath();cx.arc(p.x,p.y,p.r*4,0,6.29);cx.fill();
+  cx.globalAlpha=a;cx.beginPath();cx.arc(p.x,p.y,p.r,0,6.29);cx.fill();
+ }
+ requestAnimationFrame(frame);
+}
+colors();size();addEventListener('resize',size);
+new MutationObserver(()=>{colors();P.forEach(p=>p.c=col[Math.floor(rnd(0,col.length))])}).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+document.addEventListener('visibilitychange',()=>{run=!document.hidden;if(run)requestAnimationFrame(frame)});
+requestAnimationFrame(frame);
 })();
 </script>
 </body>
