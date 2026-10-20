@@ -159,6 +159,22 @@ mark{background:#e8c56e66;color:var(--bone);border-radius:2px;padding:0 1px}
 .tb tr.g td{border-top:1px solid var(--rule2)}
 .tb td:first-child{color:var(--bone);font-weight:600}
 .tb td.n{color:var(--pos)}
+.tb .rq{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:8px;color:var(--bone);font-weight:600;border-bottom:1px dashed var(--rule2)}
+.tb .rq:hover{border-bottom-color:var(--c)}
+.tb .rq:focus-visible{outline:2px solid var(--c);outline-offset:3px}
+.tb .rq::after{content:"";width:6px;height:6px;border-right:2px solid var(--c);border-bottom:2px solid var(--c);transform:translateY(-2px) rotate(45deg);transition:transform .15s}
+.tb .rq[aria-expanded=true]::after{transform:translateY(1px) rotate(-135deg)}
+.tb tr.rqd td{white-space:normal;background:var(--stone2);padding:14px 16px 16px;font-weight:400;color:var(--txt)}
+.rqd .rqi{position:sticky;left:16px;max-width:min(860px,calc(100vw - 110px))}
+.rqd .bt{margin:0;color:var(--bone);font-weight:700}
+.rqd p{margin:4px 0 0;font-size:.9rem}
+.rqp{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:12px 0 4px}
+.rqp>div{border:1px solid var(--rule2);border-radius:3px;padding:8px 10px}
+.rqp b,.rqx b{display:block;color:var(--c);font-size:.85rem;margin-bottom:4px}
+.rqp ul,.rqx ul{margin:0;padding-left:18px;font-size:.88rem}
+.rqp li,.rqx li{margin:2px 0}
+.rqx{margin-top:12px}
+.rqd .nt{margin-top:12px}
 .cr{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
 .cr div{padding:12px 14px;border-radius:3px;border:1px solid;border-left-width:3px}
 .cr .ok{border-color:#5fb887aa;background:#5fb88712}.cr .bad{border-color:#f2907aaa;background:#f2907a12}
@@ -235,6 +251,7 @@ mark{background:#e8c56e66;color:var(--bone);border-radius:2px;padding:0 1px}
 :root[data-theme=light] .bd,:root[data-theme=light] .at,:root[data-theme=light] .sec,:root[data-theme=light] .tm b+i{color:color-mix(in srgb,var(--c) 58%,#000)}
 :root[data-theme=light] .sc h3{color:color-mix(in srgb,var(--c,#2b6a5b) 55%,#000)}
 :root[data-theme=light] .sc h2{color:var(--bone)}
+:root[data-theme=light] .rqp b,:root[data-theme=light] .rqx b{color:color-mix(in srgb,var(--c) 55%,#000)}
 :root[data-theme=light] .em,:root[data-theme=light] .tm svg{filter:brightness(.72) saturate(1.2)}
 :root[data-theme=light] .t4 .em,:root[data-theme=light] .t5 .em,:root[data-theme=light] .t6 .em{filter:brightness(.72) saturate(1.2)}
 :root[data-theme=light] .chip[aria-pressed=true]{background:color-mix(in srgb,var(--c,#5a6b65) 20%,#fff)}
@@ -464,6 +481,7 @@ button.chip.at,button.chip.ex{display:inline-flex;margin:0;font-size:.85rem;font
  <article id="s-tab" class="sc wide" style="--c:#e0b04e">
   <h2>Progressão de cultivo</h2>
   <p>XP necessário para concluir cada fase (25 × limite de atributo) e o que a passagem concede. O Qi dobra a cada reino.</p>
+  <p class="nt">Clique no nome de um reino para ver os requisitos de breakthrough além do XP.</p>
   <div class="tw"><table class="tb" id="tprog"></table></div>
  </article>
  <article id="s-lim" class="sc wide" style="--c:#ff9a52">
@@ -1313,12 +1331,61 @@ tabs.forEach(b=>b.onclick=()=>show(b.dataset.t));
 if(location.hash==='#sistema')show('sis',true);
 else if(location.hash==='#materiais')show('mat',true);
 
+/* requisitos de breakthrough de cada reino para o seguinte, além do XP */
+const QI6='Fogo, Água, Madeira, Terra, Vento e Trovão';
+const RQ=[
+ {i:'Três caminhos possíveis.',c:[
+  ['Caminho Mortal',['1 Tesouro de Fundação','1 Elixir de Fundação']],
+  ['Caminho Terrestre',['2 Tesouros de Fundação','3 tipos diferentes de Qi Espiritual']],
+  ['Caminho Celestial',['3 Tesouros de Fundação','6 tipos diferentes de Qi Espiritual: '+QI6]]],
+  x:[['Tesouros de Fundação',['Areia Enterra-Ossos','Orvalho do Crepúsculo','Estalactite de Mil Anos','Fruta Escarlate','Geada do Dragão de Jade','Jade de Fogo']]],
+  b:'Ter o cultivo necessário e os materiais do caminho escolhido.'},
+ {c:[['Requisitos',['4 Tesouros de Condensação de Qi','1 Elixir de Condensação de Qi']]],
+  x:[['Tesouros de Condensação de Qi','Obtidos em exploração, ruínas antigas, missões ou derrotando criaturas espirituais.']]},
+ {i:'Cinco caminhos possíveis. O caminho escolhido define a qualidade do núcleo formado.',c:[
+  ['5ª Categoria',['1 Tesouro de Núcleo Dourado','1 tipo de Qi Elemental Superior']],
+  ['4ª Categoria',['2 Tesouros de Núcleo Dourado','2 tipos de Qi Elemental']],
+  ['3ª Categoria',['3 Tesouros de Núcleo Dourado','3 tipos de Qi Elemental']],
+  ['2ª Categoria',['4 Tesouros de Núcleo Dourado','4 tipos de Qi Elemental']],
+  ['1ª Categoria',['5 Tesouros de Núcleo Dourado','6 tipos de Qi Elemental: '+QI6]]]},
+ {c:[['Requisitos',['4 Tesouros de Espírito de Origem','1 Elixir de Transformação Espiritual']]],
+  b:'Completar as fases Inicial, Mediano e Pico de Núcleo Dourado.'},
+ {i:'Três caminhos possíveis.',c:[
+  ['Caminho Mortal',['2 Tesouros de Alma Nascente','1 Elixir de Alma Nascente']],
+  ['Caminho Terrestre',['4 Tesouros de Alma Nascente','1 Aura Terrestre']],
+  ['Caminho Celestial',['6 Tesouros de Alma Nascente','1 Aura Celestial']]]},
+ {c:[['Requisitos',['5 Almas Divinas, das cinco criaturas espirituais exigidas']]],
+  x:[['As Cinco Almas Divinas',['Alma Divina de Jiaolong','Alma Divina de Gouchen','Alma Divina de Xuangu','Alma Divina de Luwu','Alma Divina de Chongming']]]},
+ {c:[['Requisitos',['3 Almas do Dao compatíveis','1 Elixir de Iluminação']]],
+  x:[['Almas do Dao','Obtidas ao completar os Reinos do Dao, que contêm combates e desafios de cultivo. As três almas precisam ter atributos principais compatíveis, e a escolha delas influencia o Campo de Regras obtido após o avanço.']]},
+ {c:[['Requisitos',['5 Sementes do Submundo (Nether Seeds)','1 Pluma do Submundo (Nether Feather)','Concluir a provação de condensação da Pluma do Submundo']]],
+  x:[['As cinco Sementes do Submundo · desafios especiais',['Illusory Bamboo Forest','Howl Ruins','Tempting Valley','Jade-cored Ice Palace','Desolate Sandbar']],
+   ['Provação da Pluma do Submundo',['Com as cinco sementes, iniciar a condensação da Pluma do Submundo','Superar uma provação de dez etapas de combate','Definir a pluma e seus atributos especiais']]]},
+ {c:[['Requisitos',['3 Qi Inatos (Primordial Air): Madeira, Água e Terra','Pérola da Miragem, para localizar o local do breakthrough','Concluir a missão final e superar a Tribulação Celestial']]],
+  b:'Completar a progressão de cultivo desse reino.'}
+];
+const ul=a=>`<ul>${a.map(v=>`<li>${v}</li>`).join('')}</ul>`;
+function rqHtml(n){
+ const r=RQ[n];
+ return `<div class="rqi"><p class="bt">${NV[n]} → ${NV[n+1]}</p>${r.i?`<p>${r.i}</p>`:''}`+
+  `<div class="rqp">${r.c.map(([t,a])=>`<div><b>${t}</b>${ul(a)}</div>`).join('')}</div>`+
+  (r.x||[]).map(([t,v])=>`<div class="rqx"><b>${t}</b>${Array.isArray(v)?ul(v):`<p>${v}</p>`}</div>`).join('')+
+  `<p class="nt">Antes do breakthrough: alcançar o Pico de ${NV[n]}.${r.b?' '+r.b:''} Ao concluir, o personagem chega a ${NV[n+1]} · Inicial.</p></div>`;
+}
+
 let h='<tr><th>Nível</th><th>Fase</th><th>XP da fase</th><th>Ao concluir a fase</th></tr>';
 for(let n=0;n<10;n++)for(let f=0;f<3;f++){
  const p=n*3+f,last=p===29,k=2**n,nx=p+1,inc=last?0:LIM[Math.floor(nx/3)][nx%3]-LIM[n][f];
- h+=`<tr class="${f===0?'g':''}"><td>${f===0?NV[n]:''}</td><td>${FA[f]}</td><td class="n">${fmt(25*LIM[n][f])}</td><td>${last?'—':`+${fmt(inc/2)} pts (máx. ${fmt(inc/4)} por atributo) · +${fmt(100*k)} Qi`}</td></tr>`;
+ const nm=f?'':RQ[n]?`<button type="button" class="rq" aria-expanded="false" aria-controls="rq${n}">${NV[n]}</button>`:NV[n];
+ h+=`<tr class="${f===0?'g':''}"><td>${nm}</td><td>${FA[f]}</td><td class="n">${fmt(25*LIM[n][f])}</td><td>${last?'—':`+${fmt(inc/2)} pts (máx. ${fmt(inc/4)} por atributo) · +${fmt(100*k)} Qi`}</td></tr>`;
+ if(f===2&&RQ[n])h+=`<tr class="rqd" id="rq${n}" hidden><td colspan="4">${rqHtml(n)}</td></tr>`;
 }
 g('tprog').innerHTML=h;
+g('tprog').onclick=e=>{
+ const b=e.target.closest('.rq');if(!b)return;
+ const on=b.getAttribute('aria-expanded')!=='true';
+ b.setAttribute('aria-expanded',on);g(b.getAttribute('aria-controls')).hidden=!on;
+};
 
 h='<tr><th>Nível</th><th>Inicial</th><th>Mediano</th><th>Pico</th></tr>';
 LIM.forEach((l,n)=>h+=`<tr class="g"><td>${NV[n]}</td>${l.map(v=>`<td class="n">${fmt(v)}</td>`).join('')}</tr>`);
