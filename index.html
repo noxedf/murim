@@ -1032,6 +1032,16 @@ const has=(x,a)=>{const fa=fold(a);return x.st.some(s=>!s.neg&&(s.f.includes(fa)
 
 /* ---------- emblemas (SVG original gerado por código) ---------- */
 const GL={
+/* glifos exclusivos da aba Materiais */
+m_ingot:`<path class="f" d="M20 16h24l6 12H14z"/><path class="f" d="M14 28h36l6 18H8z"/><path d="M24 22h9M16 38h10"/>`,
+m_ore:`<path class="f" d="M8 40l9-20 17-9 16 11 6 18-12 14H19z"/><path d="M17 20l13 14 20-12M30 34l-4 20M30 34l26 6"/>`,
+m_crystal:`<path class="f" d="M26 56V22l6-16 6 16v34z"/><path class="f" d="M11 56V36l5-10 5 10v20z"/><path class="f" d="M43 56V32l5-10 5 10v24z"/><path d="M32 6v50M6 56h52"/>`,
+m_bone:`<path class="f" d="M17 9a7 7 0 0 0-8 10 7 7 0 0 0 10 8l18 18a7 7 0 0 0 8 10 7 7 0 0 0 10-8 7 7 0 0 0-8-10L27 19a7 7 0 0 0-10-10z"/>`,
+m_scale:`<path class="f" d="M8 6h16v4a8 8 0 0 1-16 0zM24 6h16v4a8 8 0 0 1-16 0zM40 6h16v4a8 8 0 0 1-16 0zM16 18h16v4a8 8 0 0 1-16 0zM32 18h16v4a8 8 0 0 1-16 0zM8 30h16v4a8 8 0 0 1-16 0zM24 30h16v4a8 8 0 0 1-16 0zM40 30h16v4a8 8 0 0 1-16 0zM16 42h16v4a8 8 0 0 1-16 0zM32 42h16v4a8 8 0 0 1-16 0z"/>`,
+m_spool:`<path d="M14 8h30M14 56h30"/><path class="f" d="M18 12h22v40H18z"/><path d="M18 20h22M18 28h22M18 36h22M18 44h22M40 40q14 4 12 18"/>`,
+m_vial:`<path d="M26 6h12M28 6v12M36 6v12"/><circle class="f" cx="32" cy="38" r="20"/><path d="M20 40q6-7 12 0t12 0"/><circle class="k" cx="25" cy="31" r="2.2"/>`,
+m_herb:`<path d="M32 30V16"/><path class="f" d="M32 16c-4-8-12-10-16-6 4 6 10 8 16 6zM32 16c4-8 12-10 16-6-4 6-10 8-16 6zM32 16c-3-6-2-11 0-13 2 2 3 7 0 13z"/><path class="f" d="M22 30h20l-5 14-5 14-5-14z"/><path d="M26 38l-8 4M38 38l8 4M28 46l-6 6M36 46l6 6"/>`,
+m_log:`<path class="f" d="M16 18h32a8 13 0 0 1 0 26H16"/><ellipse class="f" cx="16" cy="31" rx="8" ry="13"/><ellipse cx="16" cy="31" rx="3.5" ry="6"/><path d="M28 25h14M32 37h12"/>`,
 sword:`<path class="f" d="M32 4l5 8-1.5 28h-7L27 12z"/><path d="M18 40h28M32 40v13"/><circle class="k" cx="32" cy="57" r="2.6"/>`,
 spear:`<path d="M10 58L44 20"/><path class="f" d="M40.3 16.7L58 4 47.7 23.3z"/><path d="M36 26l6 6"/>`,
 bow:`<path d="M18 6q32 26 0 52"/><path d="M18 6v52"/><path d="M8 32h46M48 26l6 6-6 6"/>`,
@@ -1182,6 +1192,7 @@ function emblem(x){
  const t=TI[x.k];let seed=x.id*7919+13;
  const r=()=>{seed=(seed*9301+49297)%233280;return seed/233280};
  let s='';
+ const sh=(c,rad)=>x.hx?`<polygon class="${c}" points="${[0,1,2,3,4,5].map(i=>{const a=(i*60-90)*Math.PI/180;return (rad*Math.cos(a)).toFixed(1)+' '+(rad*Math.sin(a)).toFixed(1)}).join(' ')}"/>`:`<circle class="${c}" r="${rad}"/>`;
  const nr=[0,0,10,12,16,20,28][t];
  if(nr){
   const off=r()*360/nr;let d='';
@@ -1191,11 +1202,11 @@ function emblem(x){
   }
   s+=`<path class="ry" d="${d}"/>`;
  }
- if(t>=1)s+='<circle class="rg" r="54"/>';
- if(t>=3)s+='<circle class="rg dd" r="47"/>';
+ if(t>=1)s+=sh('rg',54);
+ if(t>=3)s+=sh('rg dd',47);
  if(t>=5)s+='<path class="wg" d="M-46 -24A52 52 0 0 0 -46 24M46 -24A52 52 0 0 1 46 24"/>';
  if(t===6)s+='<path class="wg w2" d="M-40 -36A54 54 0 0 0 -40 36M40 -36A54 54 0 0 1 40 36"/>';
- s+='<circle class="ds" r="36"/><circle class="di" r="31"/>';
+ s+=sh('ds',x.hx?39:36)+sh('di',x.hx?33:31);
  const ns=t>=3?t-1:0;
  for(let i=0;i<ns;i++){
   const a=r()*Math.PI*2,rad=44+r()*10,sc=(0.8+r()*0.8).toFixed(2);
@@ -2194,16 +2205,12 @@ Essência do Selamento Eterno|3|10|Selamento|Selos supremos|Selamento condensado
 Mel do Paraíso Primordial|2|10|Vida|Elixires supremos|Mel das abelhas do pomar primordial. Acalma e cura todos os males.|Cura todos os males.|ess`
 };
 const CT={mad:'Madeira',ped:'Pedra e Jade',cri:'Cristal e Gema',oss:'Osso e Criatura',cou:'Couro e Escama',fib:'Fibra e Seda',ess:'Essência',pla:'Planta Espiritual'};
-const CG={mad:'tree',ped:'mountain',cri:'star',oss:'claw',cou:'paw',fib:'scroll',ess:'droplet',pla:'leaf'};
-/* afinidade (sem acentos) -> emblema */
-const GM={fogo:'flame',gelo:'snow',raio:'bolt',vento:'wind',agua:'wave',terra:'mountain',luz:'sun',sombra:'moon',alma:'ghost',vida:'leaf',sangue:'droplet',tempo:'hourglass',vazio:'void',abismo:'void',caos:'chaos',destino:'star',dao:'yinyang',yin:'moon',yang:'sun',selamento:'seal',tribulacao:'bolt',estelar:'star',reflexo:'mirror',ressonancia:'music',qi:'lotus',dragao:'claw',autoridade:'crown',morte:'ghost',maldicao:'ghost',destruicao:'claw',ruina:'claw',demoniaca:'claw',sacrificio:'droplet',plano:'compass',origem:'wheel',criacao:'anvil',metal:'anvil',neutra:'anvil',madeira:'tree',veneno:'flask','todos os elementos':'chaos'};
+const CG={mad:'m_log',ped:'m_ore',cri:'m_crystal',oss:'m_bone',cou:'m_scale',fib:'m_spool',ess:'m_vial',pla:'m_herb'};
 
 const M=[];
 T.forEach(([k,l,c])=>MD[k].trim().split('\n').forEach((r,i)=>{
  const p=r.split('|'),cur=p[0].charAt(0)==='!',n=cur?p[0].slice(1):p[0];
- const o={id:M.length,num:M.length+1,k,l,c,i:i+1,n,cur,du:+p[1],qi:+p[2],af:p[3],us:p[4],ds:p[5],tr:p[6],ct:'Metal'};
- o.g=GM[fold(o.af.split('/')[0].trim())]||'anvil';
- if(o.g==='anvil'){const f=fold(n);o.g=/\b(ouro|dourad)/.test(f)?'coin':/prata|argent|lua/.test(f)?'moon':/aco|lamina|espada|gume/.test(f)?'sword':/bronze|latao|cobre|estanho/.test(f)?'cauldron':/chumbo|pedra|muralha/.test(f)?'wall':/mercurio|liquido/.test(f)?'droplet':/ferro/.test(f)?'anvil':/cristal|gema|joia/.test(f)?'gem':o.g}
+ const o={id:M.length,num:M.length+1,k,l,c,i:i+1,n,cur,du:+p[1],qi:+p[2],af:p[3],us:p[4],ds:p[5],tr:p[6],ct:'Metal',g:'m_ingot'};
  o.hay=fold([n,l,o.ct,o.af,o.us,o.ds,o.tr,cur?'maldito maldicao':''].join(' '));
  M.push(o);
 }));
@@ -2226,7 +2233,7 @@ function visible(){
 function card(x){
  return `<li class="card t${TI[x.k]}${x.cur?' cur':''}" style="--c:${x.c}">
 <span class="num" title="Posição na lista (1 a ${M.length})">#${x.num}</span>
-<div class="hd"><svg class="em" viewBox="-60 -60 120 120" role="img" aria-label="Emblema ${esc(x.n)}">${emblem({k:x.k,id:x.id+500,g:x.g})}</svg><div class="ti"><h3 class="t">${esc(x.n)}</h3><span class="bd">${x.l} · ${x.ct}</span></div></div>
+<div class="hd"><svg class="em" viewBox="-60 -60 120 120" role="img" aria-label="Emblema ${esc(x.n)}">${emblem({k:x.k,id:x.id+500,g:x.g,hx:1})}</svg><div class="ti"><h3 class="t">${esc(x.n)}</h3><span class="bd">${x.l} · ${x.ct}</span></div></div>
 <ul class="st"><li>Dureza ${x.du}/10</li><li>Condução de Qi ${x.qi}/10</li><li class="oth">Afinidade: ${esc(x.af)}</li>${x.cur?'<li class="neg">🩸 Maldito</li>':''}</ul>
 <p class="in">${esc(x.ds)}</p>
 <details class="ab2"${MO?' open':''}><summary>Traço e usos</summary><ul class="ab"><li><span class="at">Traço</span><p>${esc(x.tr)}</p></li><li><span class="at">Usos</span><p>${esc(x.us)}</p></li></ul></details></li>`;
