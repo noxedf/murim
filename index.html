@@ -22,22 +22,18 @@
 <meta name="twitter:title" content="Murim Login: Destinos e Sistema">
 <meta name="twitter:description" content="Destinos, sistema de cultivo com calculadoras e materiais do mundo murim.">
 <meta name="twitter:image" content="https://noxedf.github.io/murim/og-image.png">
-<link rel="apple-touch-icon" href="https://noxedf.github.io/murim/apple-touch-icon.png">
+<link rel="apple-touch-icon" href="https://noxedf.github.io/murim/og-image.png">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Murim Login","alternateName":"Murim Login: Destinos e Sistema","url":"https://noxedf.github.io/murim/","inLanguage":"pt-BR","description":"Destinos, sistema de cultivo (cultivo duplo e mantra duplo) e materiais do mundo murim."}</script>
 <meta name="theme-color" content="#0c1112">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect x='6' y='6' width='88' height='88' rx='10' fill='%23c8412c'/%3E%3Ctext x='50' y='72' font-size='64' text-anchor='middle' fill='%23f7e9e2' font-family='serif'%3E%E6%AD%A6%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Shippori+Mincho:wght@400;600;700;800&display=swap">
-<meta name="color-scheme" content="dark light">
-<script>try{var t=localStorage.getItem("murim-theme");if(!t&&window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches)t="light";if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem("murim-theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 <style>
 :root{--h1:#1d2c2b;--h2:#101819;--m1:#2b4442;--m2:#1b2e2d;--m3:#121e1f;--okc:#7fdba3;--ink:#0c1112;--stone:#131a1b;--stone2:#1a2324;--rule:#27322f;--rule2:#34423f;--bone:#ece7da;--txt:#cbc9bd;--mut:#8e9a94;--seal:#c8412c;--seal-hi:#e2593f;--mist:#a9c2ba;--pos:#86c9b4;--neg:#f2907a;--oth:#e8c56e;--gold:#e8c56e;
  --row:var(--stone);--card:var(--stone);--ink2:var(--bone);--line:var(--rule);--teal:var(--pos);--amb:var(--seal-hi);
  --disp:"Shippori Mincho","Hiragino Mincho ProN","Noto Serif CJK JP","Noto Serif KR",Georgia,"Times New Roman",serif;
  --ui:"Hanken Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif}
 *{box-sizing:border-box}
-.skip{position:absolute;left:12px;top:-60px;z-index:100;padding:10px 16px;border-radius:4px;background:var(--seal);color:#fff4ee;font-weight:600;text-decoration:none;transition:top .15s}
-.skip:focus{top:12px}
-#main:focus{outline:none}
 html{scroll-behavior:smooth;background:var(--ink)}
 body{margin:0;color:var(--txt);font:16px/1.6 var(--ui);min-height:100vh;background:transparent;-webkit-font-smoothing:antialiased}
 .w{max-width:1120px;margin:0 auto;padding:0 20px 96px}
@@ -418,7 +414,6 @@ button.chip.at,button.chip.ex{display:inline-flex;margin:0;font-size:.85rem;font
  .anim .sc.vis .kv li.mt:nth-child(2)::after{animation-delay:.15s}
  .anim .sc.vis .kv li.mt:nth-child(3)::after{animation-delay:.3s}
  .anim .sc.vis .kv li.mt:nth-child(4)::after{animation-delay:.45s}
- .anim .sc.vis .kv li.mt:nth-child(5)::after{animation-delay:.6s}
  .anim .kv li{transition:background .2s,padding .2s}
  .anim .kv li:hover{background:color-mix(in srgb,var(--c,var(--mist)) 8%,transparent);padding-left:6px;padding-right:6px}
  .anim .kv li b{transition:color .2s}
@@ -451,36 +446,22 @@ button.chip.at,button.chip.ex{display:inline-flex;margin:0;font-size:.85rem;font
 @keyframes rowin{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:none}}
 @keyframes rqin{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
 @keyframes pop{0%{transform:scale(.85);opacity:.4}100%{transform:none;opacity:1}}
-
-/* botão compartilhar como imagem */
-:root{--i-share:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23000%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M12 3v12M7 8l5-5 5 5M5 14v5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5%22/%3E%3C/svg%3E")}
-.sb{position:absolute;top:9px;right:47px;width:34px;height:34px;min-height:0;padding:0;border-radius:4px;background:transparent;color:var(--mut);--ic:var(--i-share)}
-.sb::before{content:"";flex:none;width:16px;height:16px;background:currentColor;-webkit-mask:var(--ic) center/contain no-repeat;mask:var(--ic) center/contain no-repeat}
-.sb:hover{color:var(--bone)}
-.sb:disabled{opacity:.5;cursor:progress}
-.sb[data-st=ok]{color:var(--pos);--ic:var(--i-check)}
-.sb[data-st=err]{color:var(--neg);--ic:var(--i-x)}
-#mlist .sb{right:9px}
-#list .hd{padding-right:84px}#list .num{right:88px}
-#mlist .hd{padding-right:84px}#mlist .num{right:50px}
-@media(max-width:560px){.sb{width:38px;height:38px;right:51px}#mlist .sb{right:9px}#list .hd{padding-right:94px}#list .num{top:54px;right:16px}#mlist .hd{padding-right:94px}#mlist .num{top:12px;right:52px}}
 </style>
 </head>
 <body>
 <noscript><div style="max-width:640px;margin:48px auto;padding:0 20px;color:#cbc9bd;font:16px/1.6 system-ui,sans-serif"><h1 style="color:#ece7da;font:700 2rem/1.2 Georgia,serif">Murim Login</h1><p>Este site precisa de JavaScript para mostrar as abas <b>Destinos</b>, <b>Sistema</b> (cultivo, treinamento, cultivo duplo e mantra duplo, com calculadoras) e <b>Materiais</b> (metais, madeiras, pedras, cristais e outros materiais do mundo murim).</p><p>Ative o JavaScript no navegador e recarregue a página.</p></div></noscript>
-<a class="skip" href="#main">Pular para o conteúdo</a>
 <canvas id="qi" aria-hidden="true"></canvas>
 <header class="hero"><svg class="mt" viewBox="0 0 1200 300" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="mf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--ink);stop-opacity:0"/><stop offset="1" style="stop-color:var(--ink)"/></linearGradient><radialGradient id="mg"><stop offset="0" style="stop-color:var(--mist);stop-opacity:.3"/><stop offset="1" style="stop-color:var(--mist);stop-opacity:0"/></radialGradient></defs><path d="M0 210 L90 150 L150 185 L260 90 L340 160 L430 120 L540 200 L650 70 L740 150 L820 110 L930 190 L1030 100 L1120 160 L1200 120 V300 H0Z" style="fill:var(--m1)" opacity=".7"/><g class="mist m1"><ellipse cx="200" cy="170" rx="260" ry="34" fill="url(#mg)"/><ellipse cx="760" cy="150" rx="300" ry="30" fill="url(#mg)"/><ellipse cx="1300" cy="175" rx="260" ry="32" fill="url(#mg)"/></g><path d="M0 250 L110 200 L200 235 L330 160 L420 220 L560 140 L660 215 L790 150 L900 225 L1020 170 L1110 220 L1200 190 V300 H0Z" style="fill:var(--m2)" opacity=".95"/><g class="mist m2"><ellipse cx="-100" cy="225" rx="280" ry="30" fill="url(#mg)"/><ellipse cx="520" cy="215" rx="320" ry="34" fill="url(#mg)"/><ellipse cx="1080" cy="230" rx="280" ry="28" fill="url(#mg)"/></g><path d="M0 285 L140 250 L260 275 L420 235 L580 278 L740 245 L900 280 L1060 250 L1200 272 V300 H0Z" style="fill:var(--m3)"/><rect width="1200" height="300" fill="url(#mf)"/></svg><div class="in-h"><h1>Murim<span>Login</span></h1><div class="seal" aria-hidden="true">武林</div></div></header>
-<div class="w" id="main" role="main" tabindex="-1">
+<div class="w">
 <div class="tabbar">
 <div class="tabs" role="tablist" aria-label="Seções">
- <button class="tab" type="button" role="tab" id="tab-dest" aria-controls="p-dest" data-t="dest" aria-selected="true" tabindex="0">Destinos</button>
- <button class="tab" type="button" role="tab" id="tab-sis" aria-controls="p-sis" data-t="sis" aria-selected="false" tabindex="-1">Sistema</button>
- <button class="tab" type="button" role="tab" id="tab-mat" aria-controls="p-mat" data-t="mat" aria-selected="false" tabindex="-1">Materiais</button>
+ <button class="tab" type="button" role="tab" data-t="dest" aria-selected="true">Destinos</button>
+ <button class="tab" type="button" role="tab" data-t="sis" aria-selected="false">Sistema</button>
+ <button class="tab" type="button" role="tab" data-t="mat" aria-selected="false">Materiais</button>
 </div>
 <button class="thm" id="thm" type="button" aria-label="Alternar entre tema claro e escuro">Tema claro</button>
 </div>
-<div id="p-dest" role="tabpanel" aria-labelledby="tab-dest">
+<div id="p-dest">
 <div class="lg" id="lg" role="group" aria-label="Filtrar por cor"></div>
 
 <div class="bar">
@@ -518,7 +499,7 @@ button.chip.at,button.chip.ex{display:inline-flex;margin:0;font-size:.85rem;font
 <ol id="list"></ol>
 </div>
 
-<section id="p-sis" hidden role="tabpanel" aria-labelledby="tab-sis">
+<section id="p-sis" hidden aria-label="Sistema de cultivo e treinamento">
 <nav class="sn" id="sn" aria-label="Seções do sistema">
  <button type="button" data-go="s-cult">Cultivação</button>
  <button type="button" data-go="s-rol">Rolagens</button>
@@ -536,6 +517,15 @@ button.chip.at,button.chip.ex{display:inline-flex;margin:0;font-size:.85rem;font
   <h3>Barra de XP</h3>
   <p>O XP de cada fase é <b>25 × o limite de atributo</b> daquela fase. A barra cresce no mesmo ritmo que o atributo e o rendimento por rolagem.</p>
   <p class="nt">Refinamento de Qi: 500 → 1.000 → 1.500 · … · Transcendente: 56.000 → 61.000 → 66.000</p>
+  <h3>Tempo de cultivo</h3>
+  <p>Uma sessão de cultivo dura <b>4 horas</b>. Esse é o tempo necessário para ganhar o XP normal da rolagem. Cada hora a mais rende um bônus extra.</p>
+  <ul class="kv">
+   <li>Tempo base<b>4 horas = XP normal</b></li>
+   <li>Hora extra<b>+20% do valor final, por hora</b></li>
+   <li>Cálculo<b>juros simples: valor × porcentagem = XP extra</b></li>
+  </ul>
+  <p><b>XP total = valor final × (1 + 0,20 × horas extras)</b></p>
+  <p class="nt">O "valor final" é o rendimento já com bônus de atributo e crítico. O bônus é sempre calculado sobre esse mesmo valor, sem juros compostos. Exemplo: rendimento final de 100 XP cultivando 7 horas (3 extras): 100 × 60% = 60 XP extras, total de 160 XP.</p>
  </article>
  <article id="s-rol" class="sc" style="--c:#8fd0c0">
   <h2>Rolagens de cultivo</h2>
@@ -606,8 +596,7 @@ button.chip.at,button.chip.ex{display:inline-flex;margin:0;font-size:.85rem;font
    <li class="mt" style="--p:0%">Sem laço<b>+0%</b></li>
    <li class="mt" style="--p:25%">Mesma via ou mesmo elemento<b>+25%</b></li>
    <li class="mt" style="--p:50%">Mesma via e mesmo elemento<b>+50%</b></li>
-   <li class="mt" style="--p:75%">Cônjuge ou Alma Gêmea<b>+75%</b></li>
-   <li class="mt" style="--p:100%">Amor Eterno<b>+100%</b></li>
+   <li class="mt" style="--p:75%">Cônjuge, Alma Gêmea ou Amor Eterno<b>+75%</b></li>
   </ul></section>
 <section class="grp"><h3>Ressonância e falhas</h3>
   <div class="cr">
@@ -638,6 +627,7 @@ button.chip.at,button.chip.ex{display:inline-flex;margin:0;font-size:.85rem;font
    <label>d20<input id="c-d" type="number" min="1" max="20" value="10"></label>
    <label>Atributo<input id="c-a" type="number" min="0" value="12"></label>
    <label id="c-gl">Grau da técnica<input id="c-g" type="number" min="0" value="1"></label>
+   <label>Horas de cultivo (mín. 4)<input id="c-h" type="number" min="4" value="4"></label>
   </div>
   <div class="res" id="c-r"></div>
  </article>
@@ -661,7 +651,7 @@ button.chip.at,button.chip.ex{display:inline-flex;margin:0;font-size:.85rem;font
   </div>
 <h3>Laço</h3>
   <div class="fm">
-   <label>Harmonia<select id="d-h"><option value="0">Sem laço (+0%)</option><option value="1">Mesma via ou elemento (+25%)</option><option value="2">Via e elemento iguais (+50%)</option><option value="3">Cônjuge / Alma Gêmea (+75%)</option><option value="4">Amor Eterno (+100%)</option></select></label>
+   <label>Harmonia<select id="d-h"><option value="0">Sem laço (+0%)</option><option value="1">Mesma via ou elemento (+25%)</option><option value="2">Via e elemento iguais (+50%)</option><option value="3">Cônjuge / Amor Eterno (+75%)</option></select></label>
    <label>Diferença de nível<select id="d-n"><option value="0">0 ou 1 nível</option><option value="1">2 níveis ou mais</option></select></label>
   </div></div>
   </div>
@@ -681,7 +671,7 @@ button.chip.at,button.chip.ex{display:inline-flex;margin:0;font-size:.85rem;font
 </div>
 </section>
 
-<section id="p-mat" hidden role="tabpanel" aria-labelledby="tab-mat">
+<section id="p-mat" hidden aria-label="Materiais e metais">
 
 <div class="bar">
  <div class="sbox">
@@ -719,145 +709,6 @@ button.chip.at,button.chip.ex{display:inline-flex;margin:0;font-size:.85rem;font
 </div>
 <button id="top" type="button" aria-label="Voltar ao topo">↑</button>
 
-<script>
-/* ---------- compartilhar como imagem (PNG) ---------- */
-(function(){
-const MS=window.MurimShare=window.MurimShare||{};MS.src=MS.src||{};
-const W=1080,PAD=64,BAR=12;
-const hex=h=>{h=String(h).replace('#','');if(h.length===3)h=h.replace(/./g,'$&$&');return[0,2,4].map(i=>parseInt(h.slice(i,i+2),16)||0)};
-const toHex=a=>'#'+a.map(v=>Math.max(0,Math.min(255,Math.round(v))).toString(16).padStart(2,'0')).join('');
-const mix=(a,b,t)=>{const x=hex(a),y=hex(b);return toHex(x.map((v,i)=>v*t+y[i]*(1-t)))};
-const rgba=(h,a)=>{const x=hex(h);return`rgba(${x[0]},${x[1]},${x[2]},${a})`};
-const dk=(h,f)=>toHex(hex(h).map(v=>v*f));
-const slug=s=>String(s).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
-const DISP='"Shippori Mincho","Hiragino Mincho ProN","Noto Serif CJK JP",Georgia,serif';
-const UI='"Hanken Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif';
-
-function emblemImg(sp,C,ink,light){
- let inner=sp.svg.replace(/<use href="#g-([^"]+)" class="gl" x="(-?[\d.]+)" y="(-?[\d.]+)" width="([\d.]+)" height="([\d.]+)"\/>/g,(m,k,x,y,w)=>{
-  const sym=document.getElementById('g-'+k);if(!sym)return'';
-  return`<g class="gl" transform="translate(${x} ${y}) scale(${(+w/64).toFixed(4)})">${sym.innerHTML}</g>`;
- });
- const ds=light?mix(C,'#ffffff',.24):mix(C,ink,.16);
- const css=`.ds{fill:${ds};stroke:${C};stroke-width:2.2}.di{fill:none;stroke:${C};stroke-width:.9;opacity:.5}.rg{fill:none;stroke:${C};stroke-width:1;opacity:.4}.rg.dd{stroke-dasharray:2 5;opacity:.6}.ry{fill:none;stroke:${C};stroke-width:1.7;stroke-linecap:round;opacity:.65}.wg{fill:none;stroke:${C};stroke-width:2.4;stroke-linecap:round;opacity:.85}.wg.w2{opacity:.5;stroke-width:1.6}.spk{fill:${C}}.gl{fill:none;stroke:${C};stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round}`;
- const svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="-60 -60 120 120" width="480" height="480"><style>${css}</style>${inner}</svg>`;
- return new Promise((res,rej)=>{const i=new Image();i.onload=()=>res(i);i.onerror=rej;i.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg)});
-}
-function wrap(ctx,text,maxW){
- const out=[];String(text).split('\n').forEach(par=>{
-  let line='';par.split(/\s+/).filter(Boolean).forEach(w=>{
-   const t=line?line+' '+w:w;
-   if(ctx.measureText(t).width<=maxW||!line)line=t;else{out.push(line);line=w}
-  });
-  out.push(line);
- });
- return out;
-}
-async function build(sp){
- const st=getComputedStyle(document.documentElement);
- const v=n=>st.getPropertyValue(n).trim();
- const light=document.documentElement.dataset.theme==='light';
- const T={ink:v('--ink')||'#0c1112',stone:v('--stone')||'#131a1b',bone:v('--bone')||'#ece7da',txt:v('--txt')||'#cbc9bd',mut:v('--mut')||'#8e9a94',rule:v('--rule2')||'#34423f',pos:v('--pos')||'#86c9b4',neg:v('--neg')||'#f2907a',oth:v('--oth')||'#e8c56e'};
- const C=light?dk(sp.color,.72):sp.color;
- try{await Promise.all([document.fonts.load('800 54px "Shippori Mincho"'),document.fonts.load('700 30px "Hanken Grotesk"'),document.fonts.load('400 29px "Hanken Grotesk"'),document.fonts.load('italic 400 30px "Hanken Grotesk"')])}catch(e){}
- const img=await emblemImg(sp,C,T.ink,light);
- const cv=document.createElement('canvas'),ctx=cv.getContext('2d');
- const x0=PAD+BAR+10,cw=W-x0-PAD,E=210;
- function lay(draw){
-  let y=PAD;
-  // cabeçalho
-  ctx.font=`800 56px ${DISP}`;
-  const tl=wrap(ctx,sp.title,cw-E-34);
-  const blockH=tl.length*64+10+36;
-  const hh=Math.max(E,blockH);
-  if(draw){
-   ctx.save();
-   if(sp.tier>=4){ctx.shadowColor=C;ctx.shadowBlur=sp.tier>=6?42:26}
-   ctx.drawImage(img,x0-14,y-14+(hh-E)/2,E+28,E+28);
-   ctx.restore();
-  }
-  let ty=y+(hh-blockH)/2;
-  ctx.textBaseline='alphabetic';
-  if(draw){ctx.fillStyle=T.bone;ctx.font=`800 56px ${DISP}`;tl.forEach((l,i)=>ctx.fillText(l,x0+E+34,ty+50+i*64))}
-  ty+=tl.length*64+10;
-  if(draw){ctx.fillStyle=C;ctx.font=`700 31px ${UI}`;ctx.fillText(sp.sub,x0+E+34,ty+28)}
-  y+=hh+38;
-  // atributos
-  ctx.font=`600 27px ${UI}`;
-  let cx=x0;const CH=48;
-  (sp.chips||[]).forEach(c=>{
-   const w=ctx.measureText(c.t).width+36;
-   if(cx+w>x0+cw&&cx>x0){cx=x0;y+=CH+12}
-   if(draw){
-    const col=c.neg?T.neg:c.oth?T.oth:T.pos;
-    ctx.fillStyle=rgba(col,.1);ctx.fillRect(cx,y,w,CH);
-    ctx.strokeStyle=rgba(col,.4);ctx.lineWidth=2;ctx.strokeRect(cx+1,y+1,w-2,CH-2);
-    ctx.fillStyle=col;ctx.font=`600 27px ${UI}`;ctx.fillText(c.t,cx+18,y+32);
-   }
-   cx+=w+12;
-  });
-  if(sp.chips&&sp.chips.length)y+=CH+34;
-  // introdução
-  (sp.intro||[]).forEach(t=>{
-   ctx.font=`italic 400 30px ${UI}`;
-   const ls=wrap(ctx,t,cw-26);
-   if(draw){ctx.fillStyle=T.rule;ctx.fillRect(x0,y-2,3,ls.length*44+4);ctx.fillStyle=T.mut;ctx.font=`italic 400 30px ${UI}`;ls.forEach((l,i)=>ctx.fillText(l,x0+26,y+30+i*44))}
-   y+=ls.length*44+26;
-  });
-  // blocos
-  (sp.blocks||[]).forEach(b=>{
-   if(draw){ctx.fillStyle=T.rule;ctx.globalAlpha=.55;ctx.fillRect(x0,y,cw,1);ctx.globalAlpha=1}
-   y+=24;
-   if(b.h){if(draw){ctx.fillStyle=C;ctx.font=`700 31px ${UI}`;ctx.fillText(b.h,x0,y+26)}y+=42}
-   ctx.font=`400 29px ${UI}`;
-   const ls=wrap(ctx,b.t,cw);
-   if(draw){ctx.fillStyle=T.txt;ctx.font=`400 29px ${UI}`;ls.forEach((l,i)=>ctx.fillText(l,x0,y+28+i*42))}
-   y+=ls.length*42+14;
-  });
-  // rodapé
-  y+=22;
-  if(draw){ctx.fillStyle=T.rule;ctx.fillRect(x0,y,cw,2)}
-  y+=44;
-  if(draw){
-   ctx.fillStyle=T.mut;ctx.font=`700 26px ${UI}`;ctx.textAlign='left';ctx.fillText('Murim Login',x0,y);
-   const u=sp.url||'';ctx.font=`500 24px ${UI}`;ctx.textAlign='right';ctx.fillText(u,x0+cw,y);ctx.textAlign='left';
-  }
-  return y+PAD-8;
- }
- cv.width=W;cv.height=800;
- const H=Math.ceil(lay(false));
- cv.width=W;cv.height=H;
- ctx.fillStyle=T.stone;ctx.fillRect(0,0,W,H);
- ctx.fillStyle=C;ctx.fillRect(0,0,BAR,H);
- const g=ctx.createLinearGradient(0,0,W,0);g.addColorStop(0,rgba(C,.10));g.addColorStop(.6,rgba(C,0));
- ctx.fillStyle=g;ctx.fillRect(BAR,0,W-BAR,H);
- lay(true);
- return new Promise(r=>cv.toBlob(r,'image/png'));
-}
-function download(blob,name){
- const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;
- document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000);
-}
-MS.run=async function(b){
- const get=MS.src[b.dataset.k];if(!get||b.disabled)return;
- b.disabled=true;
- try{
-  const sp=get(+b.dataset.id);
-  sp.url=location.protocol==='file:'?'':location.host+location.pathname.replace(/index\.html$/,'');
-  const blob=await build(sp);if(!blob)throw new Error('png');
-  const name='murim-'+slug(sp.title)+'.png';
-  const file=new File([blob],name,{type:'image/png'});
-  if(navigator.canShare&&navigator.canShare({files:[file]})){
-   try{await navigator.share({files:[file],title:sp.title})}
-   catch(e){if(e&&e.name==='AbortError'){b.disabled=false;return}download(blob,name)}
-  }else download(blob,name);
-  b.dataset.st='ok';
- }catch(e){b.dataset.st='err'}
- b.disabled=false;setTimeout(()=>delete b.dataset.st,1400);
-};
-document.addEventListener('click',e=>{const b=e.target.closest('.sb');if(b)MS.run(b)});
-})();
-</script>
 <script>
 const T=[['cinza','Cinza','#b4bcc0'],['verde','Verde','#5fdc8a'],['azul','Azul','#6aa8ff'],['roxo','Roxo','#b392f5'],['laranja','Laranja','#ff9a52'],['vermelho','Vermelho','#ff7b7b'],['dourado','Dourado','#f2c744']];
 const ATTRS=['Força','Destreza','Agilidade','Constituição','Intelecto','Foco','Vontade','Carisma','Fortuna'];
@@ -1542,7 +1393,6 @@ function card(x){
  return `<li class="card t${TI[x.k]}" id="c${x.id}" style="--c:${x.c}">
 <span class="num" title="Posição na lista (1 a ${all.length})">#${x.p}</span>
 <div class="hd"><svg class="em" viewBox="-60 -60 120 120" role="img" aria-label="Emblema ${esc(x.n)}">${emblem(x)}</svg><div class="ti"><h3 class="t">${hl(x.n)}</h3><span class="bd">${x.l} · ${String(x.i).padStart(2,'0')}</span></div></div>
-<button class="sb" type="button" data-k="d" data-id="${x.id}" title="Compartilhar como imagem" aria-label="Compartilhar ${esc(x.n)} como imagem"></button>
 <button class="cc" type="button" data-id="${x.id}" title="Copiar este destino" aria-label="Copiar ${esc(x.n)}"></button>
 <ul class="st">${x.st.map(s=>`<li class="${s.neg?'neg':s.oth?'oth':''}">${hl(s.raw)}</li>`).join('')}</ul>
 ${intro}${list?`<ul class="ab">${list}</ul>`:''}</li>`;
@@ -1600,11 +1450,6 @@ $('pk').onclick=()=>{
  go();setTimeout(chk,120);
 };
 $('cp').onclick=async e=>{const b=e.currentTarget;flash(b,await copy(visible().map(txt).join('\n\n')),'Copiar lista')};
-window.MurimShare=window.MurimShare||{src:{}};
-window.MurimShare.src.d=id=>{const x=all[id];return{title:x.n,sub:x.l+' · '+String(x.i).padStart(2,'0'),color:x.c,tier:TI[x.k],svg:emblem(x),
- chips:x.st.map(t=>({t:t.raw,neg:t.neg,oth:t.oth})),
- intro:x.abs.filter(a=>a.k==='i').map(a=>a.t),
- blocks:x.abs.filter(a=>a.k!=='i').map(a=>a.k==='a'?{h:a.h,t:a.t}:{t:a.t})}};
 $('list').onclick=async e=>{const b=e.target.closest('.cc');if(!b)return;const ok=await copy(txt(all[+b.dataset.id]));b.dataset.st=ok?'ok':'err';setTimeout(()=>delete b.dataset.st,1200)};
 document.addEventListener('keydown',e=>{
  const typing=/INPUT|TEXTAREA/.test(document.activeElement.tagName);
@@ -1627,24 +1472,13 @@ const TT={dest:'Murim Login: Destinos e Sistema',sis:'Sistema de cultivo e trein
 function show(id,skip){
  document.title=TT[id]||TT.dest;
  g('p-dest').hidden=id!=='dest';g('p-sis').hidden=id!=='sis';g('p-mat').hidden=id!=='mat';
- tabs.forEach(b=>{const on=b.dataset.t===id;b.setAttribute('aria-selected',on);b.tabIndex=on?0:-1});
+ tabs.forEach(b=>b.setAttribute('aria-selected',b.dataset.t===id));
  try{history.replaceState(null,'',({sis:'#sistema',mat:'#materiais'})[id]||location.pathname+location.search)}catch(e){}
  if(!skip)window.scrollTo({top:0});
 }
 tabs.forEach(b=>b.onclick=()=>show(b.dataset.t));
-const tabsArr=[...tabs];
-tabsArr.forEach((b,i)=>b.addEventListener('keydown',e=>{
- let n=-1;
- if(e.key==='ArrowRight')n=(i+1)%tabsArr.length;
- else if(e.key==='ArrowLeft')n=(i-1+tabsArr.length)%tabsArr.length;
- else if(e.key==='Home')n=0;
- else if(e.key==='End')n=tabsArr.length-1;
- if(n<0)return;
- e.preventDefault();tabsArr[n].focus();show(tabsArr[n].dataset.t,true);
-}));
 if(location.hash==='#sistema')show('sis',true);
 else if(location.hash==='#materiais')show('mat',true);
-addEventListener('hashchange',()=>{const id=location.hash==='#sistema'?'sis':location.hash==='#materiais'?'mat':'dest';const cur=[...tabs].find(b=>b.getAttribute('aria-selected')==='true');if(!cur||cur.dataset.t!==id)show(id,true)});
 
 /* requisitos de breakthrough de cada reino para o seguinte, além do XP */
 const QI6='Fogo, Água, Madeira, Terra, Vento e Trovão';
@@ -1717,15 +1551,15 @@ function calcC(){
  g('c-gl').style.display=m?'none':'';
  const nat=m?Math.round(1+(d-1)*49/19):Math.round(30+(d-1)*120/19);
  const bonus=Math.floor(a/4)*5*(m?1:gr+1);
- const c=crit(nat+bonus,d);
- g('c-r').innerHTML=`<big>${fmt(c.v)} XP</big>Natural ${fmt(nat)} + bônus ${fmt(bonus)} (${Math.floor(a/4)} × 5${m?'':` × ${gr+1}`}) = ${fmt(nat+bonus)}${c.t?`<small>${c.t}</small>`:''}`;
+ const c=crit(nat+bonus,d),hr=num('c-h',4,1e4),ex=hr-4,extra=Math.floor(c.v*0.2*ex),tot=c.v+extra;
+ g('c-r').innerHTML=`<big>${fmt(tot)} XP</big>Natural ${fmt(nat)} + bônus ${fmt(bonus)} (${Math.floor(a/4)} × 5${m?'':` × ${gr+1}`}) = ${fmt(nat+bonus)}${c.t?`<small>${c.t}</small>`:''}<small>Valor final ${fmt(c.v)} XP${ex?` + ${ex} hora(s) extra: ${fmt(c.v)} × ${ex*20}% = +${fmt(extra)} XP`:' (4 horas, sem hora extra)'}.</small>`;
 }
 function calcR(){
  const p=num('r-p',0,1e9),d=num('r-d',1,20),a=num('r-a',0,1e6),n=num('r-n',0,9),f=num('r-f',0,2);
  const c=crit(p,d),gain=Math.floor(c.v/10),lim=LIM[n][f],room=Math.max(0,lim-a),fin=Math.min(gain,room);
  g('r-r').innerHTML=`<big>+${fmt(fin)} de atributo</big>Rendimento total ${fmt(c.v)} → ${fmt(gain)} (a cada 10). Limite ${fmt(lim)}, atributo ${fmt(a)}${gain>room?`<small>O limite barra ${fmt(gain-room)} ponto(s).</small>`:''}${c.t?`<small>${c.t}</small>`:''}`;
 }
-['c-t','c-d','c-a','c-g'].forEach(i=>g(i).addEventListener('input',calcC));
+['c-t','c-d','c-a','c-g','c-h'].forEach(i=>g(i).addEventListener('input',calcC));
 ['r-p','r-d','r-a','r-n','r-f'].forEach(i=>g(i).addEventListener('input',calcR));
 const HAR=[0,25,50,75,100];
 function calcD(){
@@ -2536,7 +2370,6 @@ function visible(){
 }
 function card(x){
  return `<li class="card t${TI[x.k]}${x.cur?' cur':''}" style="--c:${x.c}">
-<button class="sb" type="button" data-k="m" data-id="${x.id}" title="Compartilhar como imagem" aria-label="Compartilhar ${esc(x.n)} como imagem"></button>
 <span class="num" title="Posição na lista (1 a ${M.length})">#${x.num}</span>
 <div class="hd"><svg class="em" viewBox="-60 -60 120 120" role="img" aria-label="Emblema ${esc(x.n)}">${emblem({k:x.k,id:x.id+500,g:x.g,hx:1})}</svg><div class="ti"><h3 class="t">${esc(x.n)}</h3><span class="bd">${x.l} · ${x.ct}</span></div></div>
 <ul class="st"><li>Dureza ${x.du}/10</li><li>Condução de Qi ${x.qi}/10</li><li class="oth">Afinidade: ${esc(x.af)}</li>${x.cur?'<li class="neg">🩸 Maldito</li>':''}</ul>
@@ -2556,10 +2389,6 @@ function render(){
  });
  g('mlist').innerHTML=h;
 }
-window.MurimShare=window.MurimShare||{src:{}};
-window.MurimShare.src.m=id=>{const x=M[id];return{title:x.n,sub:x.l+' · '+x.ct,color:x.c,tier:TI[x.k],svg:emblem({k:x.k,id:x.id+500,g:x.g,hx:1}),
- chips:[{t:'Dureza '+x.du+'/10'},{t:'Condução de Qi '+x.qi+'/10'},{t:'Afinidade: '+x.af,oth:1}].concat(x.cur?[{t:'🩸 Maldito',neg:1}]:[]),
- intro:[x.ds],blocks:[{h:'Traço',t:x.tr},{h:'Usos',t:x.us}]}};
 function sortUI(){document.querySelectorAll('#msort button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.s===S.sort))}
 function chips(){
  g('mtc').innerHTML=T.map(([k,l,c])=>`<button class="chip" type="button" data-k="${k}" style="--c:${c}" aria-pressed="true">${l} (${M.filter(x=>x.k===k).length})</button>`).join('');
