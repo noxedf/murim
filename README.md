@@ -15,6 +15,10 @@ Site estático (um único `index.html`, sem dependências nem build) com:
 
 Links diretos para as abas: `#sistema` e `#materiais`.
 
+## Compartilhar imagem do card
+
+Cada card de **Destinos** e de **Materiais** tem um botão de imagem. Ele gera um PNG do card (no tema atual) e abre o compartilhamento do celular; no computador, baixa o arquivo.
+
 ## Atualizar
 
 Edite o `index.html` e faça commit. O GitHub Pages republica sozinho.
